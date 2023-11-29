@@ -1,0 +1,63 @@
+job('Staging_job') {
+   description('This is deployment to staging environment')
+  
+  scm {
+        github('Kenmakhanu/maven-web-app', 'master')
+   
+    }
+  
+  logRotator {
+        daysToKeep(5)
+        numToKeep(5)
+        artifactNumToKeep(5)
+    }
+  steps {
+    
+        maven {
+            goals('clean')
+            goals('package')
+            properties(skipTests: true)
+            mavenInstallation('Maven 3.8.4')
+           
+        }
+    }
+  
+  publishers {
+        archiveArtifacts {
+            pattern('**/*.war')
+            onlyIfSuccessful()
+        }
+    }
+}
+
+job('Production_job') {
+   description('This is deployment to production environment')
+  
+  scm {
+        github('Kenmakhanu/maven-web-app', 'master')
+   
+    }
+  
+  logRotator {
+        daysToKeep(5)
+        numToKeep(5)
+        artifactNumToKeep(5)
+    }
+  steps {
+    
+        maven {
+            goals('clean')
+            goals('package')
+            properties(skipTests: true)
+            mavenInstallation('Maven 3.8.4')
+           
+        }
+    }
+  
+  publishers {
+        archiveArtifacts {
+            pattern('**/*.war')
+            onlyIfSuccessful()
+        }
+    }
+}
