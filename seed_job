@@ -28,7 +28,29 @@ job('Staging_job') {
             onlyIfSuccessful()
         }
     }
-}
+
+steps {
+      script{
+            def mavenPom = readMavenPom file:'pom.xml'
+            def nexusRepoName = mavenPom.version.endsWith("SNAPSHOT") ? "Kens-repo-snapshot" : "kens-repo-release"
+            nexusArtifactUploader artifacts: [
+               [
+                  artifactId: 'maven-web-application', 
+                  classifier: '', 
+                  file: "target/maven-web-application-${mavenPom.version}.war",
+                  type: 'war'
+               ]
+                ],
+                credentialsId: 'nexus-user-credentials',
+                groupId: 'com.mt',
+                nexusUrl: '35.87.18.98:8081',
+                nexusVersion: 'nexus3',
+                protocol: 'http', 
+                repository: nexusRepoName,
+                version: "${mavenPom.version}"
+               }
+            }
+        }}
 
 job('Production_job') {
    label('worker')
@@ -58,6 +80,27 @@ job('Production_job') {
             onlyIfSuccessful()
         }
     }
+  steps {
+      script{
+            def mavenPom = readMavenPom file:'pom.xml'
+            def nexusRepoName = mavenPom.version.endsWith("SNAPSHOT") ? "Kens-repo-snapshot" : "kens-repo-release"
+            nexusArtifactUploader artifacts: [
+               [
+                  artifactId: 'maven-web-application', 
+                  classifier: '', 
+                  file: "target/maven-web-application-${mavenPom.version}.war",
+                  type: 'war'
+               ]
+                ],
+                credentialsId: 'nexus-user-credentials',
+                groupId: 'com.mt',
+                nexusUrl: '35.87.18.98:8081',
+                nexusVersion: 'nexus3',
+                protocol: 'http', 
+                repository: nexusRepoName,
+                version: "${mavenPom.version}"
+               }
+            }
 }
 
 job('First-Maven-Project') {
