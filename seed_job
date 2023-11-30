@@ -67,7 +67,11 @@ job('First-Maven-Project') {
         scm('* * * * *')
     }
     steps {
-        maven('clean package')
+        maven {
+              mavenInstallation('Maven 3.6.3')
+              goals('clean') 
+              goals('package')
+        }
     }
     publishers {
         archiveArtifacts {
