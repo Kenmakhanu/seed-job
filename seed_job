@@ -29,8 +29,7 @@ job('Staging_job') {
         }
     }
 
-steps {
-      script{
+ postBuildSteps(STATUS_SUCCESS){
             def mavenPom = readMavenPom file:'pom.xml'
             def nexusRepoName = mavenPom.version.endsWith("SNAPSHOT") ? "Kens-repo-snapshot" : "kens-repo-release"
             nexusArtifactUploader artifacts: [
@@ -80,8 +79,8 @@ job('Production_job') {
             onlyIfSuccessful()
         }
     }
-  steps {
-      script{
+  
+   postBuildSteps(STATUS_SUCCESS){
             def mavenPom = readMavenPom file:'pom.xml'
             def nexusRepoName = mavenPom.version.endsWith("SNAPSHOT") ? "Kens-repo-snapshot" : "kens-repo-release"
             nexusArtifactUploader artifacts: [
