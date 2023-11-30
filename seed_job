@@ -75,3 +75,4 @@ job('First-Maven-Project') {
             onlyIfSuccessful()
     }
 }
+}
