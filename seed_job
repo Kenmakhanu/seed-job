@@ -17,8 +17,7 @@ job('Staging_job') {
             mavenInstallation('Maven 3.6.3') 
             goals('clean')
             goals('package')
-            properties(skipTests: true)
-           
+            properties(skipTests: true) 
         }
     }
   
@@ -35,7 +34,6 @@ job('Production_job') {
   
   scm {
         github('Kenmakhanu/maven-web-app', 'master')
-   
     }
   
   logRotator {
@@ -50,10 +48,8 @@ job('Production_job') {
             goals('clean')
             goals('package')
             properties(skipTests: true)           
-           
         }
     }
-  
   publishers {
         archiveArtifacts {
             pattern('**/*.war')
