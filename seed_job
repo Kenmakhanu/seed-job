@@ -17,8 +17,7 @@ job('Staging_job') {
             mavenInstallation('Maven 3.6.3') 
             goals('clean')
             goals('package')
-            properties(skipTests: true) 
-            localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)  
+            properties(skipTests: true)
            
         }
     }
@@ -50,8 +49,7 @@ job('Production_job') {
             mavenInstallation('Maven 3.6.3')  
             goals('clean')
             goals('package')
-            properties(skipTests: true)  
-            localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)            
+            properties(skipTests: true)           
            
         }
     }
