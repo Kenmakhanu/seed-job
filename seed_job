@@ -14,10 +14,11 @@ job('Staging_job') {
   steps {
     
         maven {
+            mavenInstallation('Maven 3.6.3') 
             goals('clean')
             goals('package')
             properties(skipTests: true)
-            mavenInstallation('Maven 3.6.3')
+           
            
         }
     }
@@ -46,10 +47,10 @@ job('Production_job') {
   steps {
     
         maven {
+            mavenInstallation('Maven 3.6.3')  
             goals('clean')
             goals('package')
             properties(skipTests: true)
-            mavenInstallation('Maven 3.6.3')
            
         }
     }
