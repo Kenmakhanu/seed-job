@@ -15,8 +15,7 @@ job('Staging_job') {
     
         maven {
             goals('clean')
-            goals('package')
-            properties(skipTests: true)
+            goals('install')
             mavenInstallation('Maven 3.6.3')
            
         }
