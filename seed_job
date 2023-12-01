@@ -1,31 +1,5 @@
-job('Staging_job') {
-  description('This is deployment to staging environment')
-  
-  scm {
-        github('Kenmakhanu/maven-web-app', 'master')
-    }
-  
-  logRotator {
-        daysToKeep(5)
-        numToKeep(5)
-        artifactNumToKeep(5)
-    }
+job('example') {
   steps {
-        maven {
-            mavenInstallation('Maven 3.6.3') 
-            goals('clean')
-            goals('install')
-            properties(skipTests: true) 
-        }
-    }
-  
-  publishers {
-        archiveArtifacts {
-            pattern('**/*.war')
-            onlyIfSuccessful()
-        }
-    }
-
- }
- 
-
+    shell('echo Hello World!')
+  }
+}
