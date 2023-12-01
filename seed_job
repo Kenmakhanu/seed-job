@@ -1,5 +1,4 @@
 job('Staging_job') {
-   label('worker')
    description('This is deployment to staging environment')
   
   scm {
@@ -31,7 +30,4 @@ job('Staging_job') {
 
  }
  
-            onlyIfSuccessful()
-    }
-}
-}
+
